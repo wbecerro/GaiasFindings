@@ -2,6 +2,7 @@ Config:
   baseRuneChance: 0.1
   baseDoubleChance: 0
   applyLevelCost: 15
+  maxUsesPerRune: 2
 
 Messages:
   noPermission: "&b[&cExcavación&b] &eNo tienes permiso para hacer esto."

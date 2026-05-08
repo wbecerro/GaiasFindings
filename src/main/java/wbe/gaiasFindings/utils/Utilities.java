@@ -9,6 +9,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import wbe.gaiasFindings.GaiasFindings;
+import wbe.gaiasFindings.config.Rune;
 
 import java.util.*;
 
@@ -231,5 +232,30 @@ public class Utilities {
         } else {
             player.getInventory().addItem(item);
         }
+    }
+
+    public boolean applyRune(Rune rune, ItemStack item, Player player) {
+        if(!item.getItemMeta().hasEnchant(rune.getEnchantment())) {
+            player.sendMessage(GaiasFindings.messages.enchantmentNotPresent);
+            return false;
+        }
+
+        NamespacedKey runeKey = new NamespacedKey(plugin, "appliedRune" + rune.getId());
+        int uses = 0;
+        if(item.getItemMeta().getPersistentDataContainer().has(runeKey)) {
+            if(item.getItemMeta().getPersistentDataContainer().get(runeKey, PersistentDataType.INTEGER) >= GaiasFindings.config.maxUsesPerRune) {
+                player.sendMessage(GaiasFindings.messages.maxRunes);
+                return false;
+            }
+            uses = item.getItemMeta().getPersistentDataContainer().get(runeKey, PersistentDataType.INTEGER);
+        }
+
+        int enchantLevel = item.getItemMeta().getEnchantLevel(rune.getEnchantment()) + 1;
+        item.getItemMeta().addEnchant(rune.getEnchantment(), enchantLevel, true);
+        item.getItemMeta().getPersistentDataContainer().set(runeKey, PersistentDataType.INTEGER, uses + 1);
+
+        player.playSound(player.getLocation(), GaiasFindings.config.addRuneSound, 1F, 1F);
+        player.sendMessage(GaiasFindings.messages.runeApplied);
+        return true;
     }
 }

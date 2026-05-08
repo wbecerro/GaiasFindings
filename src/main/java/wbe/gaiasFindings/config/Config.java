@@ -18,6 +18,7 @@ public class Config {
     public double baseRuneChance;
     public double baseDoubleChance;
     public int applyCost;
+    public int maxUsesPerRune;
 
     public Sound doubleDropSound;
     public Sound runeDropSound;
@@ -46,6 +47,7 @@ public class Config {
         baseRuneChance = config.getDouble("Config.baseRuneChance");
         baseDoubleChance = config.getDouble("Config.baseDoubleChance");
         applyCost = config.getInt("Config.applyLevelCost");
+        maxUsesPerRune = config.getInt("Config.maxUsesPerRune");
 
         doubleDropSound = Sound.valueOf(config.getString("Sounds.doubleDropSound"));
         runeDropSound = Sound.valueOf(config.getString("Sounds.runeDropSound"));

@@ -1,7 +1,6 @@
 package wbe.gaiasFindings.listeners;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -9,16 +8,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.AnvilInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import wbe.gaiasFindings.GaiasFindings;
 import wbe.gaiasFindings.config.Rune;
-import wbe.tartarusRiches.TartarusRiches;
-import wbe.tartarusRiches.config.Gem;
-import wbe.tartarusRiches.items.Gemstone;
 
 public class InventoryClickListeners implements Listener {
 

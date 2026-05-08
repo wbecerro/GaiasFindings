@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import wbe.gaiasFindings.GaiasFindings;
 import wbe.gaiasFindings.config.Block;
 import wbe.gaiasFindings.events.PlayerReceiveRuneEvent;
+import wbe.gaiasFindings.items.RuneItem;
 
 import java.util.Random;
 
@@ -24,11 +25,11 @@ public class PlayerReceiveRuneListeners implements Listener {
         Block brokenBlock = event.getBlockType();
 
         player.playSound(player.getLocation(), GaiasFindings.config.runeDropSound, 1F, 1F);
-        event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), GaiasFindings.utilities.generateGemstone(brokenBlock.getRandomReward()));
+        event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new RuneItem(brokenBlock.getRandomReward()));
         if(random.nextDouble(100) <= doubleChance) {
             player.sendMessage(GaiasFindings.messages.doubleDrop);
             player.playSound(player.getLocation(), GaiasFindings.config.doubleDropSound, 1F, 1F);
-            event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), GaiasFindings.utilities.generateGemstone(brokenBlock.getRandomReward()));
+            event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), new RuneItem(brokenBlock.getRandomReward()));
         }
     }
 }
