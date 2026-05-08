@@ -240,6 +240,11 @@ public class Utilities {
             return false;
         }
 
+        if(player.getLevel() <= GaiasFindings.config.applyCost) {
+            player.sendMessage(GaiasFindings.messages.notEnoughXP.replace("%levels%", String.valueOf(GaiasFindings.config.applyCost)));
+            return false;
+        }
+
         NamespacedKey runeKey = new NamespacedKey(plugin, "appliedRune" + rune.getId());
         int uses = 0;
         if(item.getItemMeta().getPersistentDataContainer().has(runeKey)) {
@@ -249,10 +254,13 @@ public class Utilities {
             }
             uses = item.getItemMeta().getPersistentDataContainer().get(runeKey, PersistentDataType.INTEGER);
         }
+        ItemMeta meta = item.getItemMeta();
 
-        int enchantLevel = item.getItemMeta().getEnchantLevel(rune.getEnchantment()) + 1;
-        item.getItemMeta().addEnchant(rune.getEnchantment(), enchantLevel, true);
-        item.getItemMeta().getPersistentDataContainer().set(runeKey, PersistentDataType.INTEGER, uses + 1);
+        int enchantLevel = meta.getEnchantLevel(rune.getEnchantment()) + 1;
+        meta.addEnchant(rune.getEnchantment(), enchantLevel, true);
+        meta.getPersistentDataContainer().set(runeKey, PersistentDataType.INTEGER, uses + 1);
+        player.setLevel(player.getLevel() - GaiasFindings.config.applyCost);
+        item.setItemMeta(meta);
 
         player.playSound(player.getLocation(), GaiasFindings.config.addRuneSound, 1F, 1F);
         player.sendMessage(GaiasFindings.messages.runeApplied);

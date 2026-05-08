@@ -48,6 +48,10 @@ public class PlayerReceiveRuneEvent extends Event implements Cancellable {
         this.blockType = blockType;
     }
 
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
     @Override
     public HandlerList getHandlers() {
         return handlers;

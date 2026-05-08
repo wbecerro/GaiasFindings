@@ -1,5 +1,6 @@
 package wbe.gaiasFindings.config;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Registry;
 import org.bukkit.Sound;
@@ -75,7 +76,7 @@ public class Config {
             String id = rune;
             Material material = Material.valueOf(config.getString("Runes." + rune + ".material"));
             String name = config.getString("Runes." + rune + ".name").replace("&", "§");
-            Enchantment enchantment = searchEnchantmentByName(config.getString("Runes." + rune + ".enchantment"));
+            Enchantment enchantment = searchEnchantmentByName(config.getString("Runes." + rune + ".enchant"));
             if(enchantment == null) {
                 continue;
             }
