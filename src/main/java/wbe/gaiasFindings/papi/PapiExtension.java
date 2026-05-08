@@ -2,6 +2,7 @@ package wbe.gaiasFindings.papi;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
+import wbe.gaiasFindings.GaiasFindings;
 
 public class PapiExtension extends PlaceholderExpansion {
 
@@ -12,7 +13,7 @@ public class PapiExtension extends PlaceholderExpansion {
 
     @Override
     public String getIdentifier() {
-        return "TartarusRiches";
+        return "GaiasFindings";
     }
 
     @Override
@@ -27,7 +28,11 @@ public class PapiExtension extends PlaceholderExpansion {
 
     @Override
     public String onRequest(OfflinePlayer player, String params) {
-
+        if(params.equalsIgnoreCase("runeChance")) {
+            return String.valueOf(GaiasFindings.utilities.getPlayerRuneChance(player.getPlayer()));
+        } else if(params.equalsIgnoreCase("doubleChance")) {
+            return String.valueOf(GaiasFindings.utilities.getPlayerDoubleChance(player.getPlayer()));
+        }
 
         return null;
     }

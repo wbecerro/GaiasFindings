@@ -60,14 +60,14 @@ Items:
     runeChance: "&7Probabilidad de runa: &d%rune_chance%%"
     doubleChance: "&7Probabilidad de doble: &d%double_chance%%"
   rune:
-    name: "rune_name%"
+    name: "%rune_name%"
     lore:
       - "&7"
       - "&7Runa con restos del poder de la"
       - "&7gran madre de los titanes capaz"
       - "&7de mejorar los encantamientos."
       - "&7"
-      - "&7Se aplica al encantamiento: %enchant%"
+      - "&7Se aplica al encantamiento: &d%enchant%"
     glow: true
 
 Runes:
