@@ -1,0 +1,11 @@
+name: GaiasFindings
+version: 1.0
+main: wbe.gaiasFindings.GaiasFindings
+api-version: 1.21
+author: wbe
+softdepend: [PlaceholderAPI, mcMMO]
+commands:
+  GaiasFindings:
+    description: GaiasFindings main command
+    aliases: [gf, gaiasf, gfindings]
+    permission: gaiasfindings.command

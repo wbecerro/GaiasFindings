@@ -1,0 +1,95 @@
+Config:
+  baseRuneChance: 0.1
+  baseDoubleChance: 0
+  applyLevelCost: 15
+
+Messages:
+  noPermission: "&b[&cExcavación&b] &eNo tienes permiso para hacer esto."
+  notEnoughArgs: "&b[&cExcavación&b] &eNo has especificado suficientes argumentos."
+  reload: "&b[&cExcavación&b] &eEl plugin se ha recargado con éxito."
+  list : "&b[&cExcavación&b] &eLas runas disponibles son: "
+  doubleDrop: "&b[&cExcavación&b] &eHas extraído 2 runas de una sola extracción."
+  shovelGiven: "&b[&cExcavación&b] &eHas conseguido un &a&lLamento de Gaia&e."
+  invalidMaterial: "&b[&cExcavación&b] &eEl material especificado no es válido."
+  shovelArguments: "&b[&cExcavación&b] &eEl uso es /gaiasfindings shovel <Material> <Prob. Runa> [Jugador]."
+  runeGiven: "&b[&cExcavación&b] &eHas conseguido una runa de %rune%&e."
+  runeArguments: "&b[&cExcavación&b] &eEl uso es /gaiasfindings rune <Runa> [Jugador]."
+  runeChanceAdded: "&b[&cExcavación&b] &eSe ha añadido probabilidad de runa al objeto."
+  runeChanceArguments: "&b[&cExcavación&b] &eEl uso es /gaiasfindings runeChance <Probabilidad>."
+  doubleAdded: "&b[&cExcavación&b] &eSe ha añadido probabilidad de doble runa al objeto."
+  doubleArguments: "&b[&cExcavación&b] &eEl uso es /gaiasfindings double <Probabilidad>."
+  runeApplied: "&b[&cExcavación&b] &eHas incrustado la runa en el objeto."
+  enchantmentNotPresent: "&b[&cExcavación&b] &eEste encantamiento no está presente en el objeto."
+  maxRunes: "&b[&cExcavación&b] &eNo puedes incrustar más runas de ese tipo en este objeto."
+  notEnoughXP: "&b[&cExcavación&b] &eNecesitas %levels% niveles de experiencia para aplicar la runa."
+  modeChanged: "&d&lModo cambiado"
+  stats:
+    - "&d&m-===- &b[&cExcavación&b] &d&m-===-"
+    - "&bProbabilidad de runas: &e%runeChance%%"
+    - "&bProbabilidad de doble: &e%doubleChance%%"
+    - "&d&m-===- &b[&cExcavación&b] &d&m-===-"
+  help:
+    - "&d&m -===- &b[&cExcavación&b] &d&m-===-"
+    - "&b/gaiasfindings &eMuestra esta página."
+    - "&b/gaiasfindings shovel <Material> <Prob. Runa> [Jugador] &eDa un &a&lLamento de Gaia&e."
+    - "&b/gaiasfindings list &eMuestra todas las runeas disponibles."
+    - "&b/gaiasfindings rune <Runa> [Jugador] &eDa una runa a un jugador."
+    - "&b/gaiasfindings runeChance <Probabilidad> &eAñade probabilidad de runa al objeto."
+    - "&b/gaiasfindings double <Probabilidad> &eAñade probabilidd de doble runa al objeto."
+    - "&b/gaiasfindings stats &eMuestra tus estadísticas."
+    - "&b/gaiasfindings reload &eRecarga la configuración del plugin."
+    - "&b"
+    - "&eLeyenda: &b<> &eObligatorio  &b[] &eOpcional"
+    - "&d&m -===- &b[&cExcavación&b] &d&m-===-"
+
+Sounds:
+  doubleDropSound: ENTITY_PLAYER_LEVELUP
+  gemDropSound: ITEM_BRUSH_BRUSHING_SAND
+  addGemSound: BLOCK_RESPAWN_ANCHOR_CHARGE
+  changeModeSound: BLOCK_LEVER_CLICK
+
+Items:
+  shovel:
+    name: "&f&l🌳 &a&lLamento de Gaia &f&l🌳"
+    lore:
+      - "&7"
+      - "&7Herramienta potenciada con el poder"
+      - "&7de descrubrir preciosas runas."
+      - "&cSHIFT + Soltar &7para alternar."
+      - "&7"
+    gemChance: "&7Probabilidad de runa: &d%rune_chance%%"
+    doubleChance: "&7Probabilidad de doble: &d%double_chance%%"
+  rune:
+    name: "rune_name%"
+    lore:
+      - "&7"
+      - "&7Runa con restos del poder de la"
+      - "&7gran madre de los titanes capaz"
+      - "&7de mejorar los encantamientos."
+      - "&7"
+      - "&7Se aplica al encantamiento: %enchant%"
+    glow: true
+
+Runes:
+  sharpness:
+    material: BLADE_POTTERY_SHERD
+    name: "&d&lRune of sharpness"
+    enchant: SHARPNESS
+  smite:
+    material: SKULL_POTTERY_SHERD
+    name: "&d&lRune of smite"
+    enchant: SMITE
+
+Blocks:
+  DIRT:
+    rewards:
+      sharpness:
+        weight: 10
+      smite:
+        weight: 5
+  SAND:
+    rewards:
+      sharpness:
+        weight: 10
+      smite:
+        weight: 5
