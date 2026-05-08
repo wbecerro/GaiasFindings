@@ -44,8 +44,8 @@ Messages:
 
 Sounds:
   doubleDropSound: ENTITY_PLAYER_LEVELUP
-  gemDropSound: ITEM_BRUSH_BRUSHING_SAND
-  addGemSound: BLOCK_RESPAWN_ANCHOR_CHARGE
+  runeDropSound: ITEM_BRUSH_BRUSHING_SAND
+  addRuneSound: BLOCK_RESPAWN_ANCHOR_CHARGE
   changeModeSound: BLOCK_LEVER_CLICK
 
 Items:
@@ -57,7 +57,7 @@ Items:
       - "&7de descrubrir preciosas runas."
       - "&cSHIFT + Soltar &7para alternar."
       - "&7"
-    gemChance: "&7Probabilidad de runa: &d%rune_chance%%"
+    runeChance: "&7Probabilidad de runa: &d%rune_chance%%"
     doubleChance: "&7Probabilidad de doble: &d%double_chance%%"
   rune:
     name: "rune_name%"

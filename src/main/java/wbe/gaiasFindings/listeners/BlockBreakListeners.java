@@ -27,7 +27,7 @@ public class BlockBreakListeners implements Listener {
 
         Material material = event.getBlock().getType();
         Block brokenBlock = null;
-        for(Block block : GaiasFindings.config.ores) {
+        for(Block block : GaiasFindings.config.blocks) {
             if(block.getId().equals(material)) {
                 brokenBlock = block;
             }

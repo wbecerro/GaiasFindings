@@ -23,7 +23,7 @@ public class PlayerReceiveRuneListeners implements Listener {
         double doubleChance = GaiasFindings.utilities.getPlayerDoubleChance(player);
         Block brokenBlock = event.getBlockType();
 
-        player.playSound(player.getLocation(), GaiasFindings.config.gemDropSound, 1F, 1F);
+        player.playSound(player.getLocation(), GaiasFindings.config.runeDropSound, 1F, 1F);
         event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), GaiasFindings.utilities.generateGemstone(brokenBlock.getRandomReward()));
         if(random.nextDouble(100) <= doubleChance) {
             player.sendMessage(GaiasFindings.messages.doubleDrop);
