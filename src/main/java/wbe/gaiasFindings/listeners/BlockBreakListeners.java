@@ -39,9 +39,9 @@ public class BlockBreakListeners implements Listener {
 
         Random random = new Random();
         Player player = event.getPlayer();
-        double gemChance = GaiasFindings.utilities.getPlayerRuneChance(player);
+        double runeChance = GaiasFindings.utilities.getPlayerRuneChance(player);
 
-        if(random.nextDouble(100) <= gemChance) {
+        if(random.nextDouble(100) <= runeChance) {
             GaiasFindings.getInstance().getServer().getPluginManager().callEvent(new PlayerReceiveRuneEvent(player, brokenBlock, event.getBlock()));
         }
     }

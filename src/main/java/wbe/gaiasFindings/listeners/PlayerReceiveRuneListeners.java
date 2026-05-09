@@ -14,7 +14,7 @@ import java.util.Random;
 public class PlayerReceiveRuneListeners implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void manageGemDistribution(PlayerReceiveRuneEvent event) {
+    public void manageRuneDistribution(PlayerReceiveRuneEvent event) {
         if(event.isCancelled()) {
             return;
         }

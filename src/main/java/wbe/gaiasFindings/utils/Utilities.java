@@ -240,7 +240,7 @@ public class Utilities {
             return false;
         }
 
-        if(player.getLevel() <= GaiasFindings.config.applyCost) {
+        if(player.getLevel() < GaiasFindings.config.applyCost) {
             player.sendMessage(GaiasFindings.messages.notEnoughXP.replace("%levels%", String.valueOf(GaiasFindings.config.applyCost)));
             return false;
         }
