@@ -29,9 +29,9 @@ public class PapiExtension extends PlaceholderExpansion {
     @Override
     public String onRequest(OfflinePlayer player, String params) {
         if(params.equalsIgnoreCase("runeChance")) {
-            return String.valueOf(GaiasFindings.utilities.getPlayerRuneChance(player.getPlayer()));
+            return String.format("%.2f", GaiasFindings.utilities.getPlayerRuneChance(player.getPlayer()));
         } else if(params.equalsIgnoreCase("doubleChance")) {
-            return String.valueOf(GaiasFindings.utilities.getPlayerDoubleChance(player.getPlayer()));
+            return String.format("%.2f", GaiasFindings.utilities.getPlayerDoubleChance(player.getPlayer()));
         }
 
         return null;

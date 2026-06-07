@@ -18,7 +18,7 @@ import wbe.gaiasFindings.config.Rune;
 public class InventoryClickListeners implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void applyGem(InventoryClickEvent event) {
+    public void applyRune(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         if(!event.getAction().equals(InventoryAction.SWAP_WITH_CURSOR)) {
             return;
