@@ -14,6 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import wbe.gaiasFindings.GaiasFindings;
 import wbe.gaiasFindings.config.Rune;
+import wbe.gaiasFindings.config.SackRune;
 
 public class InventoryClickListeners implements Listener {
 
@@ -76,5 +77,86 @@ public class InventoryClickListeners implements Listener {
         player.setItemOnCursor(runeItem);
         event.setCancelled(true);
         player.updateInventory();
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void addRunesToSack(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        if(!event.getAction().equals(InventoryAction.SWAP_WITH_CURSOR)) {
+            return;
+        }
+
+        if(!event.getClick().equals(ClickType.RIGHT)) {
+            return;
+        }
+
+        ItemStack runeItem = event.getCursor();
+        ItemStack sackItem = event.getCurrentItem();
+        ItemMeta meta = runeItem.getItemMeta();
+        if(meta == null) {
+            return;
+        }
+
+        NamespacedKey typeKey = new NamespacedKey(GaiasFindings.getInstance(), "runeType");
+        NamespacedKey sackKey = new NamespacedKey(GaiasFindings.getInstance(), "runesack");
+        // Cursor es runa
+        if(!meta.getPersistentDataContainer().has(typeKey)) {
+            return;
+        }
+
+        // Current item es saco
+        if(!GaiasFindings.utilities.checkItem(sackItem, sackKey)) {
+            return;
+        }
+
+        Rune rune = GaiasFindings.config.runes.get(meta.getPersistentDataContainer().get(typeKey, PersistentDataType.STRING));
+        SackRune sackRune = GaiasFindings.utilities.getSackRune(player, rune.getId());
+        if(sackRune == null) {
+            sackRune = new SackRune(rune, runeItem.getAmount());
+            GaiasFindings.playerSacks.get(player).add(sackRune);
+        } else {
+            sackRune.setAmount(sackRune.getAmount() + runeItem.getAmount());
+        }
+
+        player.playSound(player, GaiasFindings.config.addRuneToSackSound, 1f, 1f);
+
+        runeItem.setAmount(0);
+        player.setItemOnCursor(runeItem);
+        event.setCancelled(true);
+        player.updateInventory();
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void cancelGemSackBundleFunctions(InventoryClickEvent event) {
+        if(event.getAction().equals(InventoryAction.valueOf("PICKUP_ALL_INTO_BUNDLE")) ||
+                event.getAction().equals(InventoryAction.valueOf("PICKUP_SOME_INTO_BUNDLE")) ||
+                event.getAction().equals(InventoryAction.valueOf("PICKUP_FROM_BUNDLE")) ||
+                event.getAction().equals(InventoryAction.valueOf("PLACE_ALL_INTO_BUNDLE")) ||
+                event.getAction().equals(InventoryAction.valueOf("PLACE_FROM_BUNDLE"))||
+                event.getAction().equals(InventoryAction.valueOf("PLACE_SOME_INTO_BUNDLE"))) {
+            ItemStack currentItem = event.getCurrentItem();
+            ItemStack cursor = event.getCursor();
+            NamespacedKey sackKey = new NamespacedKey(GaiasFindings.getInstance(), "runesack");
+            if(!GaiasFindings.utilities.checkItem(currentItem, sackKey)) {
+                if(!GaiasFindings.utilities.checkItem(cursor, sackKey)) {
+                    return;
+                }
+            }
+
+            event.setCancelled(true);
+        } else if((event.getAction().toString().contains("PICKUP") || event.getAction().equals(InventoryAction.NOTHING)) && event.getClick().equals(ClickType.RIGHT)) {
+            ItemStack currentItem = event.getCurrentItem();
+            NamespacedKey sackKey = new NamespacedKey(GaiasFindings.getInstance(), "runesack");
+            if(!GaiasFindings.utilities.checkItem(currentItem, sackKey)) {
+                return;
+            }
+
+            event.setCancelled(true);
+            try {
+                MenuListener.openMenu((Player) event.getWhoClicked(), 1);
+            } catch(Exception e) {
+                event.getWhoClicked().sendMessage(e.getMessage());
+            }
+        }
     }
 }

@@ -3,6 +3,8 @@ package wbe.gaiasFindings.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -10,7 +12,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import wbe.gaiasFindings.GaiasFindings;
 import wbe.gaiasFindings.config.Rune;
+import wbe.gaiasFindings.config.SackRune;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class Utilities {
@@ -19,6 +24,74 @@ public class Utilities {
 
     public Utilities() {
         plugin = GaiasFindings.getInstance();
+    }
+
+    public void savePlayerData(Player player) {
+        try {
+            File playerFile = new File(
+                    GaiasFindings.getInstance().getDataFolder(), "saves/" + player.getUniqueId() + ".yml"
+            );
+            boolean fileCreated = playerFile.createNewFile();
+            FileConfiguration playerConfig = YamlConfiguration.loadConfiguration(playerFile);
+            List<SackRune> runes = GaiasFindings.playerSacks.get(player);
+
+            playerConfig.set("runes", null);
+
+            if(runes == null || runes.isEmpty()) {
+                playerConfig.createSection("runes");
+            } else {
+                runes.forEach(gem -> {
+                    String runeId = gem.getRune().getId();
+                    playerConfig.set("runes." + runeId + ".amount", gem.getAmount());
+                });
+            }
+
+            playerConfig.save(playerFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error while saving the " + player.getName() + " data.");
+        }
+    }
+
+    public void loadPlayerData(Player player) {
+        File playerFile = new File(
+                GaiasFindings.getInstance().getDataFolder(), "saves/" + player.getUniqueId() + ".yml"
+        );
+        List<SackRune> runes = new ArrayList<>();
+        if(!playerFile.exists()) {
+            GaiasFindings.playerSacks.put(player, runes);
+            return;
+        }
+
+        FileConfiguration playerConfig = YamlConfiguration.loadConfiguration(playerFile);
+        if(playerConfig.getKeys(false).isEmpty()) {
+            GaiasFindings.playerSacks.put(player, runes);
+            return;
+        }
+
+        Set<String> runeIds = playerConfig.getConfigurationSection("runes").getKeys(false);
+        for(String runeId : runeIds) {
+            Rune rune = GaiasFindings.config.runes.get(runeId);
+            if(rune == null) {
+                continue;
+            }
+
+            int amount = playerConfig.getInt("runes." + runeId + ".amount");
+            SackRune sackRune = new SackRune(rune, amount);
+            runes.add(sackRune);
+        }
+
+        GaiasFindings.playerSacks.put(player, runes);
+    }
+
+    public SackRune getSackRune(Player player, String id) {
+        for(SackRune sackRune : GaiasFindings.playerSacks.get(player)) {
+            if(sackRune.getRune().getId().equalsIgnoreCase(id)) {
+                return sackRune;
+            }
+        }
+
+        return null;
     }
 
     public void addRuneChance(ItemStack item, double chance) {

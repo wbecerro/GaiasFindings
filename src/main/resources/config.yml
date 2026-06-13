@@ -14,6 +14,7 @@ Messages:
   invalidMaterial: "&b[&cExcavación&b] &eEl material especificado no es válido."
   shovelArguments: "&b[&cExcavación&b] &eEl uso es /gaiasfindings shovel <Material> <Prob. Runa> [Jugador]."
   runeGiven: "&b[&cExcavación&b] &eHas conseguido una runa de %rune%&e."
+  sackItemGiven: "&b[&cExcavación&b] &eHas conseguido un &5&lSaco de runas&e."
   runeArguments: "&b[&cExcavación&b] &eEl uso es /gaiasfindings rune <Runa> [Jugador]."
   runeChanceAdded: "&b[&cExcavación&b] &eSe ha añadido probabilidad de runa al objeto."
   runeChanceArguments: "&b[&cExcavación&b] &eEl uso es /gaiasfindings runeChance <Probabilidad>."
@@ -23,6 +24,10 @@ Messages:
   enchantmentNotPresent: "&b[&cExcavación&b] &eEste encantamiento no está presente en el objeto."
   maxRunes: "&b[&cExcavación&b] &eNo puedes incrustar más runas de ese tipo en este objeto."
   notEnoughXP: "&b[&cExcavación&b] &eNecesitas %levels% niveles de experiencia para aplicar la runa."
+  noRunesFound: "&b[&cExcavación&b] &eNo tienes ninguna runa."
+  pageNotFound: "&b[&cExcavación&b] &eNo se ha encontrado la página a la que quieres acceder."
+  menuNextPage: "Ir a página %next_page%"
+  menuPreviousPage: "Ir a página %previous_page%"
   modeChanged: "&d&lModo cambiado"
   stats:
     - "&d&m-===- &b[&cExcavación&b] &d&m-===-"
@@ -38,6 +43,7 @@ Messages:
     - "&b/gaiasfindings runeChance <Probabilidad> &eAñade probabilidad de runa al objeto."
     - "&b/gaiasfindings double <Probabilidad> &eAñade probabilidd de doble runa al objeto."
     - "&b/gaiasfindings stats &eMuestra tus estadísticas."
+    - "&b/gaiasfindings sack [Jugador] &eDa un saco de runas."
     - "&b/gaiasfindings reload &eRecarga la configuración del plugin."
     - "&b"
     - "&eLeyenda: &b<> &eObligatorio  &b[] &eOpcional"
@@ -48,6 +54,23 @@ Sounds:
   runeDropSound: ITEM_BRUSH_BRUSHING_SAND
   addRuneSound: BLOCK_RESPAWN_ANCHOR_CHARGE
   changeModeSound: BLOCK_LEVER_CLICK
+  addRuneToSackSound: ENTITY_ITEM_PICKUP
+
+Menu:
+  title: "&8Runas"
+  borderMaterial: GRAY_STAINED_GLASS_PANE
+  runeItem:
+    name: "%rune%"
+    lore:
+      - "&7"
+      - "&7Runa con restos del poder de la"
+      - "&7gran madre de los titanes capaz"
+      - "&7de mejorar los encantamientos."
+      - "&7Se aplica al encantamiento: &d%enchant%"
+      - "&7"
+      - "&7Cantidad: &d%amount%"
+      - "&7"
+      - "&eClic para sacar una runa."
 
 Items:
   shovel:
@@ -70,6 +93,17 @@ Items:
       - "&7"
       - "&7Se aplica al encantamiento: &d%enchant%"
     glow: true
+  sack:
+    material: ORANGE_BUNDLE
+    name: "&6&lSaco de runas"
+    lore:
+      - "&7"
+      - "&7Saco de runas que consiguió"
+      - "&7Odín al sacrificarse en Yggdrasil."
+      - "&7"
+      - "&eClic derecho para abrirlo."
+    glow: true
+
 
 Runes:
   sharpness:

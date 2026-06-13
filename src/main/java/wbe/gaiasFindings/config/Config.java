@@ -25,6 +25,12 @@ public class Config {
     public Sound runeDropSound;
     public Sound addRuneSound;
     public Sound changeModeSound;
+    public Sound addRuneToSackSound;
+
+    public String menuTitle;
+    public Material borderMaterial;
+    public String menuRuneName;
+    public List<String> menuRuneLore = new ArrayList<>();
 
     public String shovelName;
     public List<String> shovelLore = new ArrayList<>();
@@ -34,6 +40,11 @@ public class Config {
     public String runeName;
     public List<String> runeLore = new ArrayList<>();
     public boolean runeGlow;
+
+    public Material sackMaterial;
+    public String sackName;
+    public List<String> sackLore = new ArrayList<>();
+    public boolean sackGlow;
 
     public HashMap<String, Rune> runes = new HashMap<>();
     public List<Rune> runeList = new ArrayList<>();
@@ -54,6 +65,12 @@ public class Config {
         runeDropSound = Sound.valueOf(config.getString("Sounds.runeDropSound"));
         addRuneSound = Sound.valueOf(config.getString("Sounds.addRuneSound"));
         changeModeSound = Sound.valueOf(config.getString("Sounds.changeModeSound"));
+        addRuneToSackSound = Sound.valueOf(config.getString("Sounds.addRuneToSackSound"));
+
+        menuTitle = config.getString("Menu.title").replace("&", "§");
+        borderMaterial = Material.valueOf(config.getString("Menu.borderMaterial"));
+        menuRuneName = config.getString("Menu.runeItem.name").replace("&", "§");
+        menuRuneLore = config.getStringList("Menu.runeItem.lore");
 
         shovelName = config.getString("Items.shovel.name").replace("&", "§");
         shovelLore = config.getStringList("Items.shovel.lore");
@@ -63,6 +80,11 @@ public class Config {
         runeName = config.getString("Items.rune.name").replace("&", "§");
         runeLore = config.getStringList("Items.rune.lore");
         runeGlow = config.getBoolean("Items.rune.glow");
+
+        sackMaterial = Material.valueOf(config.getString("Items.sack.material"));
+        sackName = config.getString("Items.sack.name").replace("&", "§");
+        sackLore = config.getStringList("Items.sack.lore");
+        sackGlow = config.getBoolean("Items.sack.glow");
 
         Registry.ENCHANTMENT.iterator().forEachRemaining(enchantments::add);
 

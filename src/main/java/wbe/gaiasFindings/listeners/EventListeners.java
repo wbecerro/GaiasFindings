@@ -13,5 +13,9 @@ public class EventListeners {
         pluginManager.registerEvents(new InventoryClickListeners(), plugin);
         pluginManager.registerEvents(new PlayerDropItemListeners(), plugin);
         pluginManager.registerEvents(new PlayerReceiveRuneListeners(), plugin);
+        pluginManager.registerEvents(new PlayerInteractListeners(), plugin);
+        pluginManager.registerEvents(new PlayerJoinListeners(), plugin);
+        pluginManager.registerEvents(new PlayerQuitListeners(), plugin);
+        pluginManager.registerEvents(new MenuListener(), plugin);
     }
 }

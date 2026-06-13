@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import wbe.gaiasFindings.GaiasFindings;
 import wbe.gaiasFindings.config.Rune;
 import wbe.gaiasFindings.items.RuneItem;
+import wbe.gaiasFindings.items.RuneSack;
 import wbe.gaiasFindings.items.Shovel;
 
 public class CommandListener implements CommandExecutor {
@@ -139,6 +140,19 @@ public class CommandListener implements CommandExecutor {
 
                 plugin.reloadConfiguration();
                 sender.sendMessage(GaiasFindings.messages.reload);
+            } else if(args[0].equalsIgnoreCase("sack")) {
+                if(!sender.hasPermission("gaiasfindings.command.sack")) {
+                    sender.sendMessage(GaiasFindings.messages.noPermission);
+                    return false;
+                }
+
+                RuneSack sackItem = new RuneSack();
+                if(args.length > 1) {
+                    player = Bukkit.getPlayer(args[1]);
+                }
+
+                GaiasFindings.utilities.addItemToInventory(player, sackItem);
+                player.sendMessage(GaiasFindings.messages.sackItemGiven);
             }
         }
         return true;
