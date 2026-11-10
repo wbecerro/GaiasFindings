@@ -110,10 +110,12 @@ Runes:
     material: BLADE_POTTERY_SHERD
     name: "&d&lRune of sharpness"
     enchant: SHARPNESS
+    namespace: "minecraft"
   smite:
     material: SKULL_POTTERY_SHERD
     name: "&d&lRune of smite"
     enchant: SMITE
+    namespace: "minecraft"
 
 Blocks:
   DIRT:

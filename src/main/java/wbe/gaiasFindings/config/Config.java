@@ -98,7 +98,8 @@ public class Config {
             String id = rune;
             Material material = Material.valueOf(config.getString("Runes." + rune + ".material"));
             String name = config.getString("Runes." + rune + ".name").replace("&", "§");
-            Enchantment enchantment = searchEnchantmentByName(config.getString("Runes." + rune + ".enchant"));
+            Enchantment enchantment = searchEnchantmentByName(config.getString("Runes." + rune + ".enchant"),
+                    config.getString("Runes." + rune + ".namespace"));
             if(enchantment == null) {
                 continue;
             }
@@ -132,9 +133,10 @@ public class Config {
         return rewards;
     }
 
-    private Enchantment searchEnchantmentByName(String name) {
+    private Enchantment searchEnchantmentByName(String name, String namespace) {
         for(Enchantment enchantment : enchantments) {
-            if(enchantment.getKey() != null && enchantment.getKey().getKey().equalsIgnoreCase(name)) {
+            if(enchantment.getKey() != null && enchantment.getKey().getKey().equalsIgnoreCase(name) &&
+                    enchantment.getKey().getNamespace().equalsIgnoreCase(namespace)) {
                 return enchantment;
             }
         }
